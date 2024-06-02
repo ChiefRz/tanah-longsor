@@ -58,9 +58,6 @@ col = st.columns((5, 2), gap='medium')
 
 with col[0]:
     st.markdown('#### Total Population')
-    
-    choropleth = make_choropleth(df_peta_selected_year, 'KECAMATAN', 'KEJADIAN')
-    st.plotly_chart(choropleth, use_container_width=True)
 
     fig, ax = plt.subplots(figsize=(9, 8))
     df_peta_selected_year.plot(column='KEJADIAN', cmap='Wistia', legend=True, legend_kwds={"label": 'Banyaknya Kejadian', "orientation": "horizontal"}, ax=ax)
