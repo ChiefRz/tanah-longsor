@@ -57,7 +57,7 @@ def make_choropleth(input_df, input_id, input_column):
 col = st.columns((5, 2), gap='medium')
 
 with col[0]:
-    st.markdown(f' ####Peta Sebaran Tanah Longsor Kab. Semarang pada Tahun {selected_year}')
+    st.markdown(f' #### Peta Sebaran Tanah Longsor Kab. Semarang pada Tahun {selected_year}')
 
     fig, ax = plt.subplots(figsize=(9, 8))
     df_peta_selected_year.plot(column='KEJADIAN', cmap='Wistia', legend=True, legend_kwds={"label": 'Banyaknya Kejadian', "orientation": "horizontal"}, ax=ax)
