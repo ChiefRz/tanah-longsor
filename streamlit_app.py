@@ -14,7 +14,6 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded")
 
-
 #######################
 # Load data
 
@@ -31,8 +30,17 @@ with st.sidebar:
     selected_year = st.selectbox('Select a year', year_list)
     df_rekap_selected_year = all_rekap[all_rekap.TAHUN == selected_year]
     df_peta_selected_year = all_peta[all_peta.TAHUN == selected_year]
-    df_selected_year_sorted = df_peta_selected_year.sort_values(by="KEJADIAN", ascending=False)
+    
+    
+######################
+# Function
 
+def create_sum_order_items_df(df):
+    sum_order_items_df = df.groupby('KECAMATAN')['NO'].count().reset_index(name='TANAH LONGSOR')
+    return sum_order_items_df
+
+sum_order_items_df = create_sum_order_items_df(df_rekap_selected_year)
+df_selected_year_sorted = sum_order_items_df.sort_values(by="KEJADIAN", ascending=False)
 #######################
 # Dashboard Main Panel
 col = st.columns((5, 2), gap='medium')
