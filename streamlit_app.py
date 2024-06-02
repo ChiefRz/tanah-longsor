@@ -34,24 +34,6 @@ with st.sidebar:
     df_selected_year_sorted = df_peta_selected_year.sort_values(by="KEJADIAN", ascending=False)
 
 #######################
-# Plots
-
-# Choropleth map
-def make_choropleth(input_df, input_id, input_column):
-    choropleth = px.choropleth(input_df, locations=input_id, color=input_column,
-                               range_color=(0, max(df_peta_selected_year.KEJADIAN)),
-                               labels={'KEJADIAN':'BANYAK KEJADIAN'}
-                              )
-    choropleth.update_layout(
-        template='plotly_dark',
-        plot_bgcolor='rgba(0, 0, 0, 0)',
-        paper_bgcolor='rgba(0, 0, 0, 0)',
-        margin=dict(l=0, r=0, t=0, b=0),
-        height=350
-    )
-    return choropleth
-
-#######################
 # Dashboard Main Panel
 col = st.columns((5, 2), gap='medium')
 
@@ -83,9 +65,3 @@ with col[1]:
                      )}
                  )
     
-    with st.expander('About', expanded=True):
-        st.write('''
-            - Data: [U.S. Census Bureau](https://www.census.gov/data/datasets/time-series/demo/popest/2010s-state-total.html).
-            - :orange[**Gains/Losses**]: states with high inbound/ outbound migration for selected year
-            - :orange[**States Migration**]: percentage of states with annual inbound/ outbound migration > 50,000
-            ''')
