@@ -68,7 +68,7 @@ with col[0]:
     ax.set_title(f'Peta Sebaran Tanah Longsor Kab. Semarang pada Tahun {selected_year}')
     ax.set_axis_off()
     plt.show()
-    
+    st.pyplot(fig)
 
 with col[1]:
     st.markdown('#### Top States')
