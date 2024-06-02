@@ -23,7 +23,7 @@ all_peta = gpd.read_file('dashboard/all_peta.shp')
 #######################
 # Sidebar
 with st.sidebar:
-    st.image("https://github.com/ChiefRz/tanah-longsor/blob/main/asset/bpbd_kab_semarang.png")
+    st.image('asset/bpbd_kab_semarang.png')
     st.title('Tanah Longsor Dashboard')
     
     year_list = list(all_rekap.TAHUN.unique())[::-1]
