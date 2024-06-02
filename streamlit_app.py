@@ -36,11 +36,11 @@ with st.sidebar:
 # Function
 
 def create_sum_order_items_df(df):
-    sum_order_items_df = df.groupby('KECAMATAN')['NO'].count().reset_index(name='TANAH LONGSOR')
+    sum_order_items_df = df.groupby('KECAMATAN')['NO'].count().reset_index(name='JUMLAH_KEJADIAN')
     return sum_order_items_df
 
 sum_order_items_df = create_sum_order_items_df(df_rekap_selected_year)
-df_selected_year_sorted = sum_order_items_df.sort_values(by="TANAH LONGSOR", ascending=False)
+df_selected_year_sorted = sum_order_items_df.sort_values(by="JUMLAH_KEJADIAN", ascending=False)
 #######################
 # Dashboard Main Panel
 col = st.columns((5, 2), gap='medium')
@@ -58,18 +58,18 @@ with col[1]:
     st.markdown('#### Top States')
 
     st.dataframe(df_selected_year_sorted,
-                 column_order=("KECAMATAN", "TANAH LONGSOR"),
+                 column_order=("KECAMATAN", "JUMLAH_KEJADIAN"),
                  hide_index=True,
                  width=None,
                  column_config={
                     "KECAMATAN": st.column_config.TextColumn(
                         "KECAMATAN",
                     ),
-                    "TANAH LONGSOR": st.column_config.ProgressColumn(
-                        "TANAH LONGSOR",
+                    "JUMLAH_KEJADIAN": st.column_config.ProgressColumn(
+                        "JUMLAH_KEJADIAN",
                         format="%f",
                         min_value=0,
-                        max_value=max(df_selected_year_sorted.KEJADIAN),
+                        max_value=max(df_selected_year_sorted.JUMLAH_KEJADIAN),
                      )}
                  )
     
