@@ -17,8 +17,8 @@ st.set_page_config(
 #######################
 # Load data
 
-all_rekap = pd.read_csv('dashboard/all_rekap.csv')
-all_peta = gpd.read_file('dashboard/all_peta.shp')
+all_rekap = pd.read_csv('all_data/all_rekap.csv')
+all_peta = gpd.read_file('all_data/all_peta.shp')
 
 #######################
 # Sidebar
@@ -36,6 +36,21 @@ with st.sidebar:
 ######################
 # Function
 
+def make_choropleth(input_df, input_json, input_id, input_column):
+    choropleth = px.choropleth(input_df, geojson=input_json, locations=input_id, color=input_column,
+                               color_continuous_scale='Reds',
+                               range_color=(0, max(df_peta_selected_year.KEJADIAN)),
+                               hover_data='KECAMATAN',
+                               labels={'KEJADIAN':'BANYAK KEJADIAN'}
+                              )
+    choropleth.update_layout(
+        plot_bgcolor='rgba(0, 0, 0, 0)',
+        paper_bgcolor='rgba(0, 0, 0, 0)',
+        margin=dict(l=0, r=0, t=0, b=0),
+        height=350
+    )
+    return choropleth
+    
 def create_sum_order_items_df(df):
     sum_order_items_df = df.groupby('KECAMATAN')['NO'].count().reset_index(name='JUMLAH_KEJADIAN')
     return sum_order_items_df
@@ -49,11 +64,8 @@ col = st.columns((5, 2), gap='medium')
 with col[0]:
     st.markdown(f' #### Peta Sebaran Tanah Longsor Kab. Semarang pada Tahun {selected_year}')
 
-    fig, ax = plt.subplots(figsize=(9, 8))
-    df_peta_selected_year.plot(column='KEJADIAN', cmap='Wistia', legend=True, legend_kwds={"label": 'Banyaknya Kejadian', "orientation": "horizontal"}, ax=ax)
-    ax.set_axis_off()
-    plt.show()
-    st.pyplot(fig)
+    choropleth = make_choropleth(df_peta_selected_year, 'geometry', 'index', 'KEJADIAN')
+    st.plotly_chart(choropleth, use_container_width=True)
 
 with col[1]:
     st.markdown('#### Top States')
