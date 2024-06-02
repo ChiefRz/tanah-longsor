@@ -27,7 +27,7 @@ all_peta = gpd.read_file('dashboard/all_peta.shp')
 with st.sidebar:
     st.title('Tanah Longsor Dashboard')
     
-    year_list = list(all_rekap.year.unique())[::-1]
+    year_list = list(all_rekap.TAHUN.unique())[::-1]
     
     selected_year = st.selectbox('Select a year', year_list)
     df_rekap_selected_year = all_rekap[all_rekap.TAHUN == selected_year]
