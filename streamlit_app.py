@@ -61,8 +61,6 @@ with col[0]:
 
     fig, ax = plt.subplots(figsize=(9, 8))
     df_peta_selected_year.plot(column='KEJADIAN', cmap='Wistia', legend=True, legend_kwds={"label": 'Banyaknya Kejadian', "orientation": "horizontal"}, ax=ax)
-    
-    ax.set_title()
     ax.set_axis_off()
     plt.show()
     st.pyplot(fig)
