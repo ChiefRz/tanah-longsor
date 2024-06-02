@@ -37,7 +37,6 @@ with st.sidebar:
 # Function
 
 def make_choropleth(input_df, input_json, input_column):
-    input_df.reset_index(inplace=True)  # Reset the index to a column
     choropleth = px.choropleth(input_df, geojson=input_json, locations='index', color=input_column,
                                color_continuous_scale='Reds',
                                range_color=(0, max(input_df[input_column])),
