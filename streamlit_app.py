@@ -31,7 +31,7 @@ with st.sidebar:
     selected_year = st.selectbox('Select a year', year_list)
     df_rekap_selected_year = all_rekap[all_rekap.TAHUN == selected_year]
     df_peta_selected_year = all_peta[all_peta.TAHUN == selected_year]
-    df_selected_year_sorted = all_peta[all_peta.TAHUN == selected_year].sort_values(by="KEJADIAN", ascending=False)
+    df_selected_year_sorted = df_peta_selected_year.sort_values(by="KEJADIAN", ascending=False)
 
 #######################
 # Plots
