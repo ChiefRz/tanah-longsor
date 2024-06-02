@@ -40,7 +40,7 @@ def create_sum_order_items_df(df):
     return sum_order_items_df
 
 sum_order_items_df = create_sum_order_items_df(df_rekap_selected_year)
-df_selected_year_sorted = sum_order_items_df.sort_values(by="KEJADIAN", ascending=False)
+df_selected_year_sorted = sum_order_items_df.sort_values(by="TANAH LONGSOR", ascending=False)
 #######################
 # Dashboard Main Panel
 col = st.columns((5, 2), gap='medium')
@@ -58,15 +58,15 @@ with col[1]:
     st.markdown('#### Top States')
 
     st.dataframe(df_selected_year_sorted,
-                 column_order=("KECAMATAN", "KEJADIAN"),
+                 column_order=("KECAMATAN", "TANAH LONGSOR"),
                  hide_index=True,
                  width=None,
                  column_config={
                     "KECAMATAN": st.column_config.TextColumn(
                         "KECAMATAN",
                     ),
-                    "KEJADIAN": st.column_config.ProgressColumn(
-                        "KEJADIAN",
+                    "TANAH LONGSOR": st.column_config.ProgressColumn(
+                        "TANAH LONGSOR",
                         format="%f",
                         min_value=0,
                         max_value=max(df_selected_year_sorted.KEJADIAN),
