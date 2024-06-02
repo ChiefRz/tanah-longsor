@@ -36,12 +36,13 @@ with st.sidebar:
 ######################
 # Function
 
-def make_choropleth(input_df, input_json, input_id, input_column):
-    choropleth = px.choropleth(input_df, geojson=input_json, locations=input_id, color=input_column,
+def make_choropleth(input_df, input_json, input_column):
+    input_df.reset_index(inplace=True)  # Reset the index to a column
+    choropleth = px.choropleth(input_df, geojson=input_json, locations='index', color=input_column,
                                color_continuous_scale='Reds',
-                               range_color=(0, max(df_peta_selected_year.KEJADIAN)),
-                               hover_data='KECAMATAN',
-                               labels={'KEJADIAN':'BANYAK KEJADIAN'}
+                               range_color=(0, max(input_df[input_column])),
+                               hover_data='index',
+                               labels={input_column:f'BANYAK {input_column.upper()}'}
                               )
     choropleth.update_layout(
         plot_bgcolor='rgba(0, 0, 0, 0)',
@@ -64,7 +65,7 @@ col = st.columns((5, 2), gap='medium')
 with col[0]:
     st.markdown(f' #### Peta Sebaran Tanah Longsor Kab. Semarang pada Tahun {selected_year}')
 
-    choropleth = make_choropleth(df_peta_selected_year, 'geometry', 'KECAMATAN', 'KEJADIAN')
+    choropleth = make_choropleth(df_peta_selected_year, 'geometry', 'KEJADIAN')
     st.plotly_chart(choropleth, use_container_width=True)
 
 with col[1]:
