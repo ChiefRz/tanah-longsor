@@ -6,7 +6,6 @@ import matplotlib.pyplot as plt
 import plotly.express as px
 import altair as alt
 import geopandas as gpd
-import pyproj
 
 #######################
 # Page configuration
