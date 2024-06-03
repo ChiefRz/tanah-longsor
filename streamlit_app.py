@@ -76,7 +76,17 @@ with col[0]:
     fig.update_geos(fitbounds="locations", visible=True)
     fig.show()
 
-    rekap_ts = process_timeseries(df_rekap_selected_year)
+    fig, ax = plt.subplots(figsize=(16, 8))
+    ax.plot(
+        process_timeseries["TANGGAL_KEJADIAN"],
+        process_timeseries["NO"],
+        marker='o', 
+        linewidth=2,
+        color="#90CAF9"
+    )
+    ax.tick_params(axis='y', labelsize=20)
+    ax.tick_params(axis='x', labelsize=15)
+    st.pyplot(fig)
     
 with col[1]:
     st.markdown('#### Top States')
