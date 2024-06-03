@@ -52,7 +52,7 @@ def make_choropleth(input_df, input_json, input_id, input_column):
     )
     return choropleth
 
-df_peta_selected_year[['geometry', 'namaobj']] = df_peta_selected_year[['geometry', 'namaobj']].to_crs(epsg=4326).to_json()
+geojson_data = df_peta_selected_year[['geometry', 'namaobj']].to_crs(epsg=4326).to_json()
 
 def create_sum_order_items_df(df):
     sum_order_items_df = df.groupby('KECAMATAN')['NO'].count().reset_index(name='JUMLAH_KEJADIAN')
