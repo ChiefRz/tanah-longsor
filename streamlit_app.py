@@ -65,7 +65,7 @@ with col[0]:
     fig.update_geos(fitbounds="locations", visible=True)
     fig.show()
 
-    fig = px.line(df_rekap_selected_year, x=df_rekap_selected_year.index, y=TANGGAL_KEJADIAN)
+    fig = px.line(df_rekap_selected_year, x=df_rekap_selected_year.index, y='TANGGAL_KEJADIAN')
     st.plotly_chart(fig, use_container_width=True)
     
 with col[1]:
