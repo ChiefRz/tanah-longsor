@@ -37,7 +37,7 @@ with st.sidebar:
 # Function
 
 def make_choropleth(input_df):
-    choropleth = px.choropleth(input_df, geojson='geometry', locations='id', color='KEJADIAN',
+    choropleth = px.choropleth(input_df, geojson='geometry', locations='geometry', color='KEJADIAN',
                                color_continuous_scale='Reds',
                                range_color=(0, max(df_peta_selected_year.KEJADIAN)),
                                labels={'KEJADIAN':'KEJADIAN'}
