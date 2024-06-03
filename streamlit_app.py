@@ -48,7 +48,7 @@ def process_timeseries(df):
     }, inplace=True)
     return ts
 
-ts = process_timeseries
+ts = process_timeseries(df_rekap_selected_year)
 
 def create_sum_order_items_df(df):
     sum_order_items_df = df.groupby('KECAMATAN')['NO'].count().reset_index(name='JUMLAH_KEJADIAN')
