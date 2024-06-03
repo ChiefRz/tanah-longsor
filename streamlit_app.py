@@ -19,7 +19,7 @@ st.set_page_config(
 # Load data
 
 all_rekap = pd.read_csv('all_data/all_rekap.csv')
-all_peta = pd.read_csv('all_data/all_peta.csv')
+all_peta = gpd.read_file('all_data/all_peta.shp')
 
 #######################
 # Sidebar
