@@ -50,21 +50,17 @@ col = st.columns((5, 2), gap='medium')
 with col[0]:
     st.markdown(f' #### Peta Sebaran Tanah Longsor Kab. Semarang pada Tahun {selected_year}')
 
-    choropleth = px.choropleth(df_peta_selected_year, 
-                               geojson=df_peta_selected_year.geometry, 
-                               locations=df_peta_selected_year.id, 
-                               color='KEJADIAN',
-                               color_continuous_scale='Reds',
-                               range_color=(0, max(df_peta_selected_year.KEJADIAN)),
-                               labels={'KEJADIAN':'KEJADIAN'}
-                              )
-    choropleth.update_layout(
-        plot_bgcolor='rgba(0, 0, 0, 0)',
-        paper_bgcolor='rgba(0, 0, 0, 0)',
-        margin=dict(l=0, r=0, t=0, b=0),
-        height=350
-    )
-    st.plotly_chart(choropleth, use_container_width=True)
+    fig = px.choropleth(df_peta_selected_year,
+                   geojson=df_peta_selected_year.geometry,
+                   locations=df_peta_selected_year.id,
+                   color="KEJADIAN", 
+                    color_continuous_scale='Reds', 
+                    range_color=(0, max(df_peta_selected_year.KEJADIAN)),
+                    hover_data='KECAMATAN', 
+                    labels={'KEJADIAN':'KEJADIAN'})
+    
+    fig.update_geos(fitbounds="locations", visible=True)
+    fig.show()
 
 with col[1]:
     st.markdown('#### Top States')
