@@ -37,6 +37,17 @@ with st.sidebar:
 ######################
 # Function
 
+def process_timeseries(df):
+    ts = df_rekap_selected_year.resample(rule='M' , on='TANGGAL_KEJADIAN').agg({
+        "NO": "nunique"
+    })
+    ts.index = ts.index.strftime('%B')
+    ts = ts.reset_index()
+    ts.rename(columns={
+        "TANGGAL_KEJADIAN": "Bulan", "NO": "Jumlah Kejadian Bencana"
+    }, inplace=True)
+    return ts
+    
 def create_sum_order_items_df(df):
     sum_order_items_df = df.groupby('KECAMATAN')['NO'].count().reset_index(name='JUMLAH_KEJADIAN')
     return sum_order_items_df
@@ -65,8 +76,7 @@ with col[0]:
     fig.update_geos(fitbounds="locations", visible=True)
     fig.show()
 
-    fig = px.line(df_rekap_selected_year, x=df_rekap_selected_year.index, y='TANGGAL_KEJADIAN')
-    st.plotly_chart(fig, use_container_width=True)
+    rekap_ts = process_timeseries(df_rekap_selected_year)
     
 with col[1]:
     st.markdown('#### Top States')
