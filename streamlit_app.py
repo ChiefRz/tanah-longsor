@@ -19,7 +19,7 @@ st.set_page_config(
 # Load data
 
 all_rekap = pd.read_csv('all_data/all_rekap.csv')
-all_peta = gpd.read_file('all_data/all_peta.shp')
+all_peta = pd.read_csv('all_data/all_peta.csv')
 
 #######################
 # Sidebar
@@ -50,8 +50,6 @@ def make_choropleth(input_df):
         height=350
     )
     return choropleth
-    
-df_peta_selected_year.to_crs(pyproj.CRS.from_epsg(4326), inplace=True)
 
 def create_sum_order_items_df(df):
     sum_order_items_df = df.groupby('KECAMATAN')['NO'].count().reset_index(name='JUMLAH_KEJADIAN')
