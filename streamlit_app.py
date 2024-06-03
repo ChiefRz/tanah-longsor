@@ -64,7 +64,7 @@ col = st.columns((5, 2), gap='medium')
 with col[0]:
     st.markdown(f' #### Peta Sebaran Tanah Longsor Kab. Semarang pada Tahun {selected_year}')
 
-    choropleth = make_choropleth(df_peta_selected_year, df_peta_selected_year.geometry, 'KECAMATAN', 'KEJADIAN')
+    choropleth = make_choropleth(df_peta_selected_year, df_peta_selected_year.geometry, 'index', 'KEJADIAN')
     st.plotly_chart(choropleth, use_container_width=True)
 
 with col[1]:
