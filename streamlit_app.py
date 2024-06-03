@@ -37,23 +37,15 @@ with st.sidebar:
 ######################
 # Function
 
-def process_timeseries(df):
-    ts = df_rekap_selected_year.resample(rule='M' , on='TANGGAL_KEJADIAN').agg({
+def visualize_time_series(df_rekap_selected_year):
+    rekap_ts = df_rekap_selected_year.resample(rule='M', on='TANGGAL_KEJADIAN').agg({
         "NO": "nunique"
     })
-    ts.index = ts.index.strftime('%B')
-    ts = ts.reset_index()
-    ts.rename(columns={
+    rekap_ts.index = rekap_ts.index.strftime('%B')
+    rekap_ts = rekap_ts.reset_index()
+    rekap_ts.rename(columns={
         "TANGGAL_KEJADIAN": "Bulan", "NO": "Jumlah Kejadian Bencana"
     }, inplace=True)
-    return ts
-
-datetime_columns = ["TANGGAL_KEJADIAN"]
-df_rekap_selected_year.reset_index(inplace=True)
-for column in datetime_columns:
-    df_rekap_selected_year[column] = pd.to_datetime(df_rekap_selected_year[column])
-
-ts = process_timeseries(df_rekap_selected_year)
 
 def create_sum_order_items_df(df):
     sum_order_items_df = df.groupby('KECAMATAN')['NO'].count().reset_index(name='JUMLAH_KEJADIAN')
@@ -83,17 +75,8 @@ with col[0]:
     fig.update_geos(fitbounds="locations", visible=True)
     fig.show()
 
-    fig, ax = plt.subplots(figsize=(16, 8))
-    ax.plot(
-        ts["TANGGAL_KEJADIAN"],
-        ts["Jumlah Kejadian Bencana"],
-        marker='o', 
-        linewidth=2,
-        color="#90CAF9"
-    )
-    ax.tick_params(axis='y', labelsize=20)
-    ax.tick_params(axis='x', labelsize=15)
-    st.pyplot(fig)
+    fig = px.line(rekap_ts, x="Bulan", y="Jumlah Kejadian Bencana")
+    st.plotly_chart(fig, use_container_width=True)
     
 with col[1]:
     st.markdown('#### Top States')
