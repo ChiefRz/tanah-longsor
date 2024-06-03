@@ -52,8 +52,6 @@ def make_choropleth(input_df, input_json, input_id, input_column):
     )
     return choropleth
 
-geojson_data = df_peta_selected_year[['geometry', 'namaobj']].to_crs(epsg=4326).to_json()
-
 def create_sum_order_items_df(df):
     sum_order_items_df = df.groupby('KECAMATAN')['NO'].count().reset_index(name='JUMLAH_KEJADIAN')
     return sum_order_items_df
@@ -67,7 +65,7 @@ col = st.columns((5, 2), gap='medium')
 with col[0]:
     st.markdown(f' #### Peta Sebaran Tanah Longsor Kab. Semarang pada Tahun {selected_year}')
 
-    choropleth = make_choropleth(df_peta_selected_year, 'geometry', 'namaobj', 'KEJADIAN')
+    choropleth = make_choropleth(df_peta_selected_year, 'geometry', 'id', 'KEJADIAN')
     st.plotly_chart(choropleth, use_container_width=True)
 
 with col[1]:
