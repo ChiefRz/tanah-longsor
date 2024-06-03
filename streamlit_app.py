@@ -40,7 +40,6 @@ def make_choropleth(input_df, input_json, input_id, input_column):
     choropleth = px.choropleth(input_df, geojson=input_json, locations=input_id, color=input_column,
                                color_continuous_scale='Reds',
                                range_color=(0, max(df_peta_selected_year.KEJADIAN)),
-                               hover_data='KECAMATAN',
                                labels={'KEJADIAN':'KEJADIAN'}
                               )
     choropleth.update_layout(
