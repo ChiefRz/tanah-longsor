@@ -47,7 +47,9 @@ def process_timeseries(df):
         "TANGGAL_KEJADIAN": "Bulan", "NO": "Jumlah Kejadian Bencana"
     }, inplace=True)
     return ts
-    
+
+ts = process_timeseries
+
 def create_sum_order_items_df(df):
     sum_order_items_df = df.groupby('KECAMATAN')['NO'].count().reset_index(name='JUMLAH_KEJADIAN')
     return sum_order_items_df
