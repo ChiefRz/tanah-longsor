@@ -79,7 +79,7 @@ with col[0]:
     fig, ax = plt.subplots(figsize=(16, 8))
     ax.plot(
         process_timeseries["TANGGAL_KEJADIAN"],
-        process_timeseries["NO"],
+        process_timeseries["Jumlah Kejadian Bencana"],
         marker='o', 
         linewidth=2,
         color="#90CAF9"
