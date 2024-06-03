@@ -46,6 +46,9 @@ def visualize_time_series(df_rekap_selected_year):
     rekap_ts.rename(columns={
         "TANGGAL_KEJADIAN": "Bulan", "NO": "Jumlah Kejadian Bencana"
     }, inplace=True)
+    return rekap_ts
+
+rekap_ts = visualize_time_series(df_rekap_selected_year)
 
 def create_sum_order_items_df(df):
     sum_order_items_df = df.groupby('KECAMATAN')['NO'].count().reset_index(name='JUMLAH_KEJADIAN')
