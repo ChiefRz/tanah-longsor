@@ -38,6 +38,7 @@ with st.sidebar:
 # Function
 
 def visualize_time_series(df_rekap_selected_year):
+    df_rekap_selected_year.set_index('TANGGAL_KEJADIAN', inplace=True)
     rekap_ts = df_rekap_selected_year.resample(rule='M', on='TANGGAL_KEJADIAN').agg({
         "NO": "nunique"
     })
