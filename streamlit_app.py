@@ -36,8 +36,8 @@ with st.sidebar:
 ######################
 # Function
 
-def make_choropleth(input_df, input_json, input_id, input_column):
-    choropleth = px.choropleth(input_df, geojson=input_json, locations=input_id, color=input_column,
+def make_choropleth(input_df):
+    choropleth = px.choropleth(input_df, geojson='geometry', locations='id', color='KEJADIAN',
                                color_continuous_scale='Reds',
                                range_color=(0, max(df_peta_selected_year.KEJADIAN)),
                                labels={'KEJADIAN':'KEJADIAN'}
@@ -63,7 +63,7 @@ col = st.columns((5, 2), gap='medium')
 with col[0]:
     st.markdown(f' #### Peta Sebaran Tanah Longsor Kab. Semarang pada Tahun {selected_year}')
 
-    choropleth = make_choropleth(df_peta_selected_year, 'geometry', 'id', 'KEJADIAN')
+    choropleth = make_choropleth(df_peta_selected_year)
     st.plotly_chart(choropleth, use_container_width=True)
 
 with col[1]:
