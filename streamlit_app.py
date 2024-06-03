@@ -43,6 +43,7 @@ def make_choropleth(input_df):
                                range_color=(0, max(df_peta_selected_year.KEJADIAN)),
                                labels={'KEJADIAN':'KEJADIAN'}
                               )
+    choropleth.update_geos(fitbounds="locations", visible=False)
     choropleth.update_layout(
         plot_bgcolor='rgba(0, 0, 0, 0)',
         paper_bgcolor='rgba(0, 0, 0, 0)',
