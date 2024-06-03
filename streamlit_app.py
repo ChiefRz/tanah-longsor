@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import plotly.express as px
 import altair as alt
 import geopandas as gpd
+import pyproj
 
 #######################
 # Page configuration
@@ -37,7 +38,7 @@ with st.sidebar:
 # Function
 
 def make_choropleth(input_df):
-    choropleth = px.choropleth(input_df, geojson='geometry', locations='geometry', color='KEJADIAN',
+    choropleth = px.choropleth(input_df, geojson='geometry', locations='id', color='KEJADIAN',
                                color_continuous_scale='Reds',
                                range_color=(0, max(df_peta_selected_year.KEJADIAN)),
                                labels={'KEJADIAN':'KEJADIAN'}
@@ -49,6 +50,8 @@ def make_choropleth(input_df):
         height=350
     )
     return choropleth
+    
+df_peta_selected_year.to_crs(pyproj.CRS.from_epsg(4326), inplace=True)
 
 def create_sum_order_items_df(df):
     sum_order_items_df = df.groupby('KECAMATAN')['NO'].count().reset_index(name='JUMLAH_KEJADIAN')
