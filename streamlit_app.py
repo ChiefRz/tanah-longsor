@@ -40,9 +40,9 @@ with st.sidebar:
 def make_choropleth(input_df, input_json, input_id, input_column):
     choropleth = px.choropleth(input_df, geojson=input_json, locations=input_id, color=input_column,
                                color_continuous_scale='Reds',
-                               range_color=(0, max(input_df[input_column])),
-                               hover_data='index',
-                               labels={input_column:f'BANYAK {input_column.upper()}'}
+                               range_color=(0, max(df_peta_selected_year.KEJADIAN)),
+                               hover_data='KECAMATAN',
+                               labels={'KEJADIAN':'KEJADIAN'}
                               )
     choropleth.update_layout(
         plot_bgcolor='rgba(0, 0, 0, 0)',
