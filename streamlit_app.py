@@ -48,6 +48,11 @@ def process_timeseries(df):
     }, inplace=True)
     return ts
 
+datetime_columns = ["TANGGAL_KEJADIAN"]
+df_rekap_selected_year.reset_index(inplace=True)
+for column in datetime_columns:
+    df_rekap_selected_year[column] = pd.to_datetime(df_rekap_selected_year[column])
+
 ts = process_timeseries(df_rekap_selected_year)
 
 def create_sum_order_items_df(df):
