@@ -53,7 +53,7 @@ def make_choropleth(input_df, input_json, input_id, input_column):
     return choropleth
 
 df_peta_selected_year.reset_index(inplace=True)
-df_peta_selected_year[['geometry', 'index']] = df_peta_selected_year[['geometry', 'index']].to_crs(pyproj.CRS.from_epsg(4326))
+df_peta_selected_year[['geometry', 'namobj']] = df_peta_selected_year[['geometry', 'namobj']].to_crs(pyproj.CRS.from_epsg(4326))
 
 def create_sum_order_items_df(df):
     sum_order_items_df = df.groupby('KECAMATAN')['NO'].count().reset_index(name='JUMLAH_KEJADIAN')
@@ -68,7 +68,7 @@ col = st.columns((5, 2), gap='medium')
 with col[0]:
     st.markdown(f' #### Peta Sebaran Tanah Longsor Kab. Semarang pada Tahun {selected_year}')
 
-    choropleth = make_choropleth(df_peta_selected_year, 'geometry', 'index', 'KEJADIAN')
+    choropleth = make_choropleth(df_peta_selected_year, 'geometry', 'namobj', 'KEJADIAN')
     st.plotly_chart(choropleth, use_container_width=True)
 
 with col[1]:
