@@ -50,12 +50,14 @@ col = st.columns((5, 2), gap='medium')
 with col[0]:
     st.markdown(f' #### Peta Sebaran Tanah Longsor Kab. Semarang pada Tahun {selected_year}')
 
-    choropleth = px.choropleth(df_peta_selected_year, geojson=df_peta_selected_year.geometry, locations=df_peta_selected_year.id, color='KEJADIAN',
+    choropleth = px.choropleth(df_peta_selected_year, 
+                               geojson=df_peta_selected_year.geometry, 
+                               locations=df_peta_selected_year.id, 
+                               color='KEJADIAN',
                                color_continuous_scale='Reds',
                                range_color=(0, max(df_peta_selected_year.KEJADIAN)),
                                labels={'KEJADIAN':'KEJADIAN'}
                               )
-    choropleth.update_geos(fitbounds="locations", visible=False)
     choropleth.update_layout(
         plot_bgcolor='rgba(0, 0, 0, 0)',
         paper_bgcolor='rgba(0, 0, 0, 0)',
