@@ -77,6 +77,7 @@ def tren(input_df):
 
 def process_data(input):
     # Kelompokkan data berdasarkan bulan per bulan
+    input["TANGGAL_KEJADIAN"] = pd.to_datetime(input["TANGGAL_KEJADIAN"])
     data_bulan = input.groupby(input["TANGGAL_KEJADIAN"].dt.month)
     
     # Hitung jumlah kejadian bencana yang unik pada kolom NO setiap bulan
