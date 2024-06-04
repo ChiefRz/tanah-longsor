@@ -71,7 +71,7 @@ def tren(input):
     jumlah_kejadian = jumlah_kejadian.reset_index()
     jumlah_kejadian = jumlah_kejadian.rename(columns={"index": "Bulan", "NO": "Jumlah Kejadian Bencana"})
     
-    tren = px.line(jumlah_kejadian, x='Bulan', y='Jumlah Kejadian Bencana')
+    tren = px.line(jumlah_kejadian, x='Bulan', y='Jumlah Kejadian Bencana', markers=True)
     return tren
     
 
