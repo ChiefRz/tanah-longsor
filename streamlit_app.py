@@ -37,20 +37,6 @@ with st.sidebar:
 ######################
 # Function
 
-def visualize_time_series(df_rekap_selected_year):
-    df_rekap_selected_year.set_index('TANGGAL_KEJADIAN', inplace=True)
-    rekap_ts = df_rekap_selected_year.resample(rule='M', on='TANGGAL_KEJADIAN').agg({
-        "NO": "nunique"
-    })
-    rekap_ts.index = rekap_ts.index.strftime('%B')
-    rekap_ts = rekap_ts.reset_index()
-    rekap_ts.rename(columns={
-        "TANGGAL_KEJADIAN": "Bulan", "NO": "Jumlah Kejadian Bencana"
-    }, inplace=True)
-    return rekap_ts
-
-rekap_ts = visualize_time_series(df_rekap_selected_year)
-
 def create_sum_order_items_df(df):
     sum_order_items_df = df.groupby('KECAMATAN')['NO'].count().reset_index(name='JUMLAH_KEJADIAN')
     return sum_order_items_df
@@ -77,9 +63,6 @@ with col[0]:
     )
     fig.show()
 
-    fig = px.line(rekap_ts, x="Bulan", y="Jumlah Kejadian Bencana")
-    st.plotly_chart(fig, use_container_width=True)
-    
 with col[1]:
     st.markdown('#### Top States')
 
