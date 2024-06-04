@@ -84,21 +84,12 @@ def process_data(input):
     jumlah_kejadian = data_bulan["NO"].nunique()
     
     # Ubah format indeks menjadi nama bulan
-    nama_bulan = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-    jumlah_kejadian.index = [nama_bulan[i-1] for i in jumlah_kejadian.index]
-    
-    # Ubah indeks menjadi kolom biasa dan membuat indeks baru
-    jumlah_kejadian = jumlah_kejadian.reset_index()
-    jumlah_kejadian = jumlah_kejadian.rename(columns={"index": "Bulan", "NO": "Jumlah Kejadian Bencana"})
 
-    # Tampilkan bulan yang tidak memiliki value 
-    all_bulan = pd.DataFrame(nama_bulan, columns=["Bulan"])
-    jumlah_kejadian = jumlah_kejadian.merge(all_bulan, how="outer").fillna(0)
-    
-    month_order = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-    jumlah_kejadian["Bulan"] = pd.Categorical(jumlah_kejadian["Bulan"], categories=month_order, ordered=True)
-    jumlah_kejadian = jumlah_kejadian.sort_values("Bulan")
+    jumlah_kejadian.index = jumlah_kejadian.index.strftime('%B') #mengubah format order date menjadi Tahun-Bulan
     jumlah_kejadian = jumlah_kejadian.reset_index()
+    jumlah_kejadian.rename(columns={
+        "TANGGAL_KEJADIAN": "Bulan", "NO": "Jumlah Kejadian Bencana"}, inplace=True)
+   
     
     return jumlah_kejadian
 
