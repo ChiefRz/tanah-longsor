@@ -55,6 +55,7 @@ def make_choropleth(input_df, input_js, input_id, input_columne):
     return choropleth
 
 def tren(input_df):
+    df_rekap_selected_year['TANGGAL_KEJADIAN'] = pd.to_datetime(df_rekap_selected_year['TANGGAL_KEJADIAN'])
     df_rekap_selected_year.set_index('TANGGAL_KEJADIAN', inplace=True)
     rekap_ts = input_df.resample(rule='M', on='TANGGAL_KEJADIAN').agg({
         "NO": "nunique"
