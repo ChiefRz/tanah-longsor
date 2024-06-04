@@ -7,6 +7,7 @@ import plotly.express as px
 import altair as alt
 import geopandas as gpd
 import pyproj
+import plotly.graph_objects as go
 
 #######################
 # Page configuration
@@ -50,18 +51,18 @@ col = st.columns((5, 2), gap='medium')
 with col[0]:
     st.markdown(f' #### Peta Sebaran Tanah Longsor Kab. Semarang pada Tahun {selected_year}')
 
-    fig = px.choropleth(df_peta_selected_year, locations='KECAMATAN', color='KEJADIAN', 
-                               color_continuous_scale='Reds',
-                               range_color=(0, max(df_peta_selected_year.KEJADIAN)),
-                               labels={'KEJADIAN':'KEJADIAN'}
-                              )
+    fig = go.Figure(go.Choropleth(df_peta_selected_year, locations='KECAMATAN', color='KEJADIAN', 
+                                  color_continuous_scale='Reds',
+                                  range_color=(0, max(df_peta_selected_year.KEJADIAN)),
+                                  labels={'KEJADIAN':'KEJADIAN'}
+                                 )
     fig.update_layout(
         plot_bgcolor='rgba(0, 0, 0, 0)',
         paper_bgcolor='rgba(0, 0, 0, 0)',
         margin=dict(l=0, r=0, t=0, b=0),
         height=350
     )
-    fig.show()
+    st.plotly_chart(fig)
 
 with col[1]:
     st.markdown('#### Top States')
