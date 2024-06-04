@@ -51,7 +51,7 @@ col = st.columns((5, 2), gap='medium')
 with col[0]:
     st.markdown(f' #### Peta Sebaran Tanah Longsor Kab. Semarang pada Tahun {selected_year}')
 
-    fig = px.choropleth(df_peta_selected_year, locations=df_peta_selected_year.index, color='KEJADIAN', 
+    fig = px.choropleth(df_peta_selected_year, locations=df_peta_selected_year.id, color='KEJADIAN', 
                         color_continuous_scale='Reds',
                         range_color=(0, max(df_peta_selected_year.KEJADIAN)),
                         labels={'KEJADIAN':'KEJADIAN'}
