@@ -38,7 +38,7 @@ with st.sidebar:
 ######################
 # Function
 def make_choropleth(input_df, input_js, input_id, input_columne):
-    choropleth = px.choropleth(input_df, geojson=input_input_js,
+    choropleth = px.choropleth(input_df, geojson=input_js,
                                locations=input_id,
                                color=input_columne,
                                color_continuous_scale='Reds',
