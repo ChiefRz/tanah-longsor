@@ -63,7 +63,7 @@ with col[0]:
         height=350
     )
     fig.update_geos(fitbounds="locations", visible=True)
-    st.plotly_chart(fig)
+    fig.show()
 
 with col[1]:
     st.markdown('#### Top States')
