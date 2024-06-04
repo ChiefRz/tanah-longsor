@@ -71,7 +71,12 @@ def tren(input):
     jumlah_kejadian = jumlah_kejadian.reset_index()
     jumlah_kejadian = jumlah_kejadian.rename(columns={"index": "Bulan", "NO": "Jumlah Kejadian Bencana"})
 
-    return jumlah_kejadian
+    plt.figure(figsize=(12, 6))
+    plt.plot(jumlah_kejadian["Bulan"], jumlah_kejadian["Jumlah Kejadian Bencana"])
+    plt.title(f'Jumlah Kejadian Tanah Longsor Kab. Semarang Tahun {selected_year}', loc="center", fontsize=20)
+    plt.show()
+
+    return plt
 
 def create_sum_order_items_df(df):
     sum_order_items_df = df.groupby('KECAMATAN')['NO'].count().reset_index(name='JUMLAH_KEJADIAN')
