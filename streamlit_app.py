@@ -54,6 +54,28 @@ def make_choropleth(input_df, input_js, input_id, input_columne):
     choropleth.update_geos(fitbounds="locations", visible=True)
     return choropleth
 
+def tren(input_df):
+    rekap_ts = input_df.resample(rule='M', on='TANGGAL_KEJADIAN').agg({
+        "NO": "nunique"
+    })
+    rekap_ts.index = rekap_ts.index.strftime('%B') #mengubah format order date menjadi Tahun-Bulan
+    rekap_ts = rekap_ts.reset_index()
+    rekap_ts.rename(columns={"TANGGAL_KEJADIAN": "Bulan", "NO": "Jumlah Kejadian Bencana"}, inplace=True)
+
+    tren, ax = plt.subplots(figsize=(13, 5))
+    ax.plot(
+        rekap_ts["Bulan"],
+        rekap_ts["Jumlah Kejadian Bencana"],
+        marker='o',
+        linewidth=2,
+        color="#72BCD4"
+    )
+    ax.set_title(f'Jumlah Kejadian Tanah Longsor Kab. Semarang Tahun {selected_year}', loc="center", fontsize=20)
+    ax.tick_params(axis='x', labelsize=10)
+    ax.tick_params(axis='y', labelsize=10)
+    return tren
+
+
 def create_sum_order_items_df(df):
     sum_order_items_df = df.groupby('KECAMATAN')['NO'].count().reset_index(name='JUMLAH_KEJADIAN')
     return sum_order_items_df
@@ -69,6 +91,9 @@ with col[0]:
     
     choropleth = make_choropleth(df_peta_selected_year, df_peta_selected_year.geometry, df_peta_selected_year.index, 'KEJADIAN')
     st.plotly_chart(choropleth, use_container_width=True)
+    
+    tren = plot_timeseries(df_rekap_selected_year)
+    st.pyplot(tren)
 
 with col[1]:
     st.markdown('#### Top States')
