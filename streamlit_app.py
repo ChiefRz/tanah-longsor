@@ -79,13 +79,13 @@ def create_sum_order_items_df(df):
     sum_order_items_df = df.groupby('KECAMATAN')['NO'].count().reset_index(name='JUMLAH_KEJADIAN')
     return sum_order_items_df
 
-def generate_chart(values, names):
-    rekap_lapor = df_rekap_selected_year.groupby(by="PELAPOR").NO.nunique().reset_index()
+def generate_chart(input):
+    rekap_lapor = input.groupby(by="PELAPOR").NO.nunique().reset_index()
     rekap_lapor.rename(columns={
         "NO": "Jumlah Kejadian Bencana"
     }, inplace=True)
     
-    fig = px.pie(rekap_lapor, values=values, names=names, hole=.3)
+    fig = px.pie(rekap_lapor, values='Jumlah Kejadian Bencana', names='PELAPOR', hole=.3)
     return fig
 
 sum_order_items_df = create_sum_order_items_df(df_rekap_selected_year)
@@ -124,7 +124,7 @@ with col[1]:
                      )}
                  )
 
-    tren = generate_chart(Jumlah Kejadian Bencana, PELAPOR)
-    st.plotly_chart(tren, use_container_width=True)
+    fit = generate_chart(df_rekap_selected_year)
+    st.plotly_chart(fig, use_container_width=True)
     
     st.write(df_peta_selected_year.head())
