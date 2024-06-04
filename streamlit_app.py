@@ -37,7 +37,7 @@ with st.sidebar:
     
 ######################
 # Function
-df_peta_selected_year.to_crs(pyproj.CRS.from_epsg(4326), inplace=True)
+all_peta.to_crs(pyproj.CRS.from_epsg(4326), inplace=True)
 
 def make_choropleth(input_df, input_js, input_id, input_columne):
     choropleth = px.choropleth(input_df, geojson=input_js,
