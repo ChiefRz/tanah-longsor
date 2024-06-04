@@ -14,7 +14,6 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded")
 
-st.set_page_config(theme="light")
 #######################
 # Load data
 
