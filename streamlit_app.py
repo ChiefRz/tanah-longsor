@@ -85,12 +85,14 @@ def process_data(input):
     
     # Ubah format indeks menjadi nama bulan
 
-    jumlah_kejadian.index = jumlah_kejadian.index.strftime('%B') #mengubah format order date menjadi Tahun-Bulan
+
+    nama_bulan = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+    jumlah_kejadian = jumlah_kejadian.reindex(nama_bulan)
+
+    # Ubah indeks menjadi kolom biasa dan membuat indeks baru
     jumlah_kejadian = jumlah_kejadian.reset_index()
-    jumlah_kejadian.rename(columns={
-        "TANGGAL_KEJADIAN": "Bulan", "NO": "Jumlah Kejadian Bencana"}, inplace=True)
-   
-    
+    jumlah_kejadian = jumlah_kejadian.rename(columns={"index": "Bulan", "NO": "Jumlah Kejadian Bencana"})
+
     return jumlah_kejadian
 
 def create_sum_order_items_df(df):
