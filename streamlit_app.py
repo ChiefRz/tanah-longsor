@@ -62,7 +62,7 @@ with col[0]:
         margin=dict(l=0, r=0, t=0, b=0),
         height=350
     )
-    st.plotly_chart(fig)
+    fig.show()
 
 with col[1]:
     st.markdown('#### Top States')
