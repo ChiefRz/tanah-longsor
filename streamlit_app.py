@@ -37,6 +37,22 @@ with st.sidebar:
     
 ######################
 # Function
+def make_choropleth(input_df, input_js, input_id, input_columne):
+    choropleth = px.choropleth(input_df, geojson=input_input_js,
+                               locations=input_id,
+                               color=input_columne,
+                               color_continuous_scale='Reds',
+                               range_color=(0, max(df_peta_selected_year.KEJADIAN)),
+                               labels={'KEJADIAN':'KEJADIAN'}
+                               hover_data='KECAMATAN',
+    choropleth.update_layout(
+        template='plotly_dark',
+        plot_bgcolor='rgba(0, 0, 0, 0)',
+        paper_bgcolor='rgba(0, 0, 0, 0)',
+        margin=dict(l=0, r=0, t=0, b=0),
+        height=350
+    )
+    return choropleth
 
 def create_sum_order_items_df(df):
     sum_order_items_df = df.groupby('KECAMATAN')['NO'].count().reset_index(name='JUMLAH_KEJADIAN')
@@ -51,19 +67,8 @@ col = st.columns((5, 2), gap='medium')
 with col[0]:
     st.markdown(f' #### Peta Sebaran Tanah Longsor Kab. Semarang pada Tahun {selected_year}')
 
-    fig = px.choropleth(df_peta_selected_year, geojson=df_peta_selected_year.geometry, locations=df_peta_selected_year.id, color='KEJADIAN', 
-                        color_continuous_scale='Reds',
-                        range_color=(0, max(df_peta_selected_year.KEJADIAN)),
-                        labels={'KEJADIAN':'KEJADIAN'}
-                       )
-    fig.update_layout(
-        plot_bgcolor='rgba(0, 0, 0, 0)',
-        paper_bgcolor='rgba(0, 0, 0, 0)',
-        margin=dict(l=0, r=0, t=0, b=0),
-        height=350
-    )
-    fig.update_geos(fitbounds="locations", visible=True)
-    fig.show()
+    choropleth = make_choropleth(df_peta_selected_year, 'geometry', 'id', 'KEJADIAN')
+    st.plotly_chart(choropleth, use_container_width=True)
 
 with col[1]:
     st.markdown('#### Top States')
