@@ -72,7 +72,7 @@ with col[0]:
 
     fig = px.choropleth(df_peta_selected_year, geojson=df_peta_selected_year.geometry, locations=df_peta_selected_year.id, color='KEJADIAN',
                     color_continuous_scale='Reds',
-                    range_color=(0, max(COBA_selected_year.KEJADIAN)),
+                    range_color=(0, max(df_peta_selected_year.KEJADIAN)),
                     labels={'KEJADIAN':'KEJADIAN'}
                     )
     
