@@ -54,28 +54,7 @@ def make_choropleth(input_df, input_js, input_id, input_columne):
     choropleth.update_geos(fitbounds="locations", visible=True)
     return choropleth
 
-def tren(input_df):
-    rekap_ts = input_df.resample(rule='M', on=df_rekap_selected_year.TANGGAL_KEJADIAN).agg({
-        "NO": "nunique"
-    })
-    rekap_ts.index = rekap_ts.index.strftime('%B') #mengubah format order date menjadi Tahun-Bulan
-    rekap_ts = rekap_ts.reset_index()
-    rekap_ts.rename(columns={"TANGGAL_KEJADIAN": "Bulan", "NO": "Jumlah Kejadian Bencana"}, inplace=True)
-
-    tren, ax = plt.subplots(figsize=(13, 5))
-    ax.plot(
-        rekap_ts["Bulan"],
-        rekap_ts["Jumlah Kejadian Bencana"],
-        marker='o',
-        linewidth=2,
-        color="#72BCD4"
-    )
-    ax.set_title(f'Jumlah Kejadian Tanah Longsor Kab. Semarang Tahun {selected_year}', loc="center", fontsize=20)
-    ax.tick_params(axis='x', labelsize=10)
-    ax.tick_params(axis='y', labelsize=10)
-    return tren
-
-def process_data(input):
+def tren(input):
     # Kelompokkan data berdasarkan bulan per bulan
     input["TANGGAL_KEJADIAN"] = pd.to_datetime(input["TANGGAL_KEJADIAN"])
     data_bulan = input.groupby(input["TANGGAL_KEJADIAN"].dt.month)
@@ -86,7 +65,7 @@ def process_data(input):
     # Ubah format indeks menjadi nama bulan
     nama_bulan = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
     jumlah_kejadian.index = [nama_bulan[i-1] for i in jumlah_kejadian.index]
-    jumlah_kejadian = jumlah_kejadian.reindex(nama_bulan)
+    jumlah_kejadian = jumlah_kejadian.reindex(nama_bulan, fill_value=0)
 
     # Ubah indeks menjadi kolom biasa dan membuat indeks baru
     jumlah_kejadian = jumlah_kejadian.reset_index()
@@ -110,7 +89,7 @@ with col[0]:
     choropleth = make_choropleth(df_peta_selected_year, df_peta_selected_year.geometry, df_peta_selected_year.index, 'KEJADIAN')
     st.plotly_chart(choropleth, use_container_width=True)
     
-    data_proses = process_data(df_rekap_selected_year)
+    data_proses = tren(df_rekap_selected_year)
     st.write(data_proses)
 
 with col[1]:
