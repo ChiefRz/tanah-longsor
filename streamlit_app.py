@@ -37,6 +37,7 @@ with st.sidebar:
     
 ######################
 # Function
+df_peta_selected_year.to_crs(pyproj.CRS.from_epsg(4326), inplace=True)
 
 def make_choropleth(input_df, input_js, input_id, input_columne):
     choropleth = px.choropleth(input_df, geojson=input_js,
@@ -69,8 +70,7 @@ col = st.columns((5, 2), gap='medium')
 with col[0]:
     st.markdown(f' #### Peta Sebaran Tanah Longsor Kab. Semarang pada Tahun {selected_year}')
 
-    geojson = df_peta_selected_year.geometry.to_crs(epsg=4326).to_json()
-    choropleth = make_choropleth(df_peta_selected_year, geojson, 'id', 'KEJADIAN')
+    choropleth = make_choropleth(df_peta_selected_year, 'geometry', 'id', 'KEJADIAN')
     st.plotly_chart(choropleth, use_container_width=True)
 
 with col[1]:
