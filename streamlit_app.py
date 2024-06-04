@@ -84,9 +84,8 @@ def process_data(input):
     jumlah_kejadian = data_bulan["NO"].nunique()
     
     # Ubah format indeks menjadi nama bulan
-
-
     nama_bulan = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+    jumlah_kejadian.index = [nama_bulan[i-1] for i in jumlah_kejadian.index]
     jumlah_kejadian = jumlah_kejadian.reindex(nama_bulan)
 
     # Ubah indeks menjadi kolom biasa dan membuat indeks baru
