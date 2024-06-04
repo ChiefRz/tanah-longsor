@@ -28,7 +28,7 @@ with st.sidebar:
     st.image('asset/bpbd_kab_semarang.png')
     st.title('Tanah Longsor Dashboard')
     
-    year_list = list(all_rekap.TAHUN.unique())[::-1]
+    year_list = list(all_peta.TAHUN.unique())[::-1]
     
     selected_year = st.selectbox('Select a year', year_list)
     df_rekap_selected_year = all_rekap[all_rekap.TAHUN == selected_year]
