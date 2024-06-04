@@ -109,7 +109,8 @@ with col[0]:
     st.plotly_chart(choropleth, use_container_width=True)
     
     st.markdown("Data Kejadian Bencana")
-    data_proses = process_data(df_peta_selected_year)
+    tahun = df_peta_selected_year
+    data_proses = process_data(tahun)
     st.write(data_proses)
 
 with col[1]:
