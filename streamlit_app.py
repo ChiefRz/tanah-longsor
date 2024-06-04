@@ -124,7 +124,7 @@ with col[1]:
                      )}
                  )
 
-    fit = generate_chart(df_rekap_selected_year)
+    fig = generate_chart(df_rekap_selected_year)
     st.plotly_chart(fig, use_container_width=True)
     
     st.write(df_peta_selected_year.head())
