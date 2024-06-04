@@ -124,7 +124,7 @@ with col[1]:
                      )}
                  )
     
-    st.markdown('#### Proporsi Pelaporan')
+    st.markdown('##### Proporsi Pelaporan')
     fig = generate_chart(df_rekap_selected_year)
     st.plotly_chart(fig, use_container_width=True)
     
