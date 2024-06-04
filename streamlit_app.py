@@ -2,10 +2,9 @@
 # Import libraries
 import streamlit as st
 import pandas as pd
+import geopandas as gpd
 import matplotlib.pyplot as plt
 import plotly.express as px
-import geopandas as gpd
-import pyproj
 import plotly.graph_objects as go
 
 #######################
@@ -15,7 +14,6 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded")
 
-st.set_dark_mode(False)
 #######################
 # Load data
 
