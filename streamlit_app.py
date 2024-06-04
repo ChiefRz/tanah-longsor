@@ -77,7 +77,7 @@ def tren(input_df):
 
 def process_data(input):
     # Kelompokkan data berdasarkan bulan per bulan
-    data_bulan = input.groupby(df_rekap_selected_year[df_rekap_selected_year.TANGGAL_KEJADIAN].dt.month)
+    data_bulan = input.groupby(input["TANGGAL_KEJADIAN"].dt.month)
     
     # Hitung jumlah kejadian bencana yang unik pada kolom NO setiap bulan
     jumlah_kejadian = data_bulan["NO"].nunique()
