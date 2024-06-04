@@ -55,7 +55,6 @@ def make_choropleth(input_df, input_js, input_id, input_columne):
     return choropleth
 
 def tren(input_df):
-    df_rekap_selected_year.set_index(df_rekap_selected_year.TANGGAL_KEJADIAN, inplace=True)
     rekap_ts = input_df.resample(rule='M', on=df_rekap_selected_year.TANGGAL_KEJADIAN).agg({
         "NO": "nunique"
     })
@@ -76,6 +75,22 @@ def tren(input_df):
     ax.tick_params(axis='y', labelsize=10)
     return tren
 
+def process_data(tahun):
+    # Kelompokkan data berdasarkan bulan per bulan
+    data_bulan = df_peta_selected_year.groupby(df_peta_selected_year["TANGGAL_KEJADIAN"].dt.month)
+    
+    # Hitung jumlah kejadian bencana yang unik pada kolom NO setiap bulan
+    jumlah_kejadian = data_bulan["NO"].nunique()
+    
+    # Ubah format indeks menjadi nama bulan
+    nama_bulan = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+    jumlah_kejadian.index = [nama_bulan[i-1] for i in jumlah_kejadian.index]
+    
+    # Ubah indeks menjadi kolom biasa dan membuat indeks baru
+    jumlah_kejadian = jumlah_kejadian.reset_index()
+    jumlah_kejadian = jumlah_kejadian.rename(columns={"index": "Bulan", "NO": "Jumlah Kejadian Bencana"})
+    
+    return jumlah_kejadian
 
 def create_sum_order_items_df(df):
     sum_order_items_df = df.groupby('KECAMATAN')['NO'].count().reset_index(name='JUMLAH_KEJADIAN')
@@ -93,8 +108,9 @@ with col[0]:
     choropleth = make_choropleth(df_peta_selected_year, df_peta_selected_year.geometry, df_peta_selected_year.index, 'KEJADIAN')
     st.plotly_chart(choropleth, use_container_width=True)
     
-    tren = tren(df_rekap_selected_year)
-    st.pyplot(tren)
+    st.markdown("Data Kejadian Bencana")
+    data_proses = process_data(df_peta_selected_year)
+    st.write(data_proses)
 
 with col[1]:
     st.markdown('#### Top States')
