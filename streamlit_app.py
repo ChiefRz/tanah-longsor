@@ -98,6 +98,7 @@ def process_data(input):
     month_order = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
     jumlah_kejadian["Bulan"] = pd.Categorical(jumlah_kejadian["Bulan"], categories=month_order, ordered=True)
     jumlah_kejadian = jumlah_kejadian.sort_values("Bulan")
+    jumlah_kejadian = jumlah_kejadian.reset_index()
     
     return jumlah_kejadian
 
