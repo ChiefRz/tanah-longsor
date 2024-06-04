@@ -70,11 +70,9 @@ def tren(input):
     # Ubah indeks menjadi kolom biasa dan membuat indeks baru
     jumlah_kejadian = jumlah_kejadian.reset_index()
     jumlah_kejadian = jumlah_kejadian.rename(columns={"index": "Bulan", "NO": "Jumlah Kejadian Bencana"})
-
-    plt.plot(jumlah_kejadian["Bulan"], jumlah_kejadian["Jumlah Kejadian Bencana"])
-    plt.xlabel("Bulan")
-    plt.ylabel("Jumlah Kejadian Bencana")
-    plt.title("Trend Kejadian Bencana")
+    
+    tren = px.line(jumlah_kejadian, x='Bulan', y='Jumlah Kejadian Bencana')
+    return tren
     
 
 def create_sum_order_items_df(df):
@@ -93,8 +91,8 @@ with col[0]:
     choropleth = make_choropleth(df_peta_selected_year, df_peta_selected_year.geometry, df_peta_selected_year.index, 'KEJADIAN')
     st.plotly_chart(choropleth, use_container_width=True)
     
-    data_proses = tren(df_rekap_selected_year)
-    st.pyplot(data_proses)
+    tren = tren(df_rekap_selected_year)
+    st.plotly_chart(tren, use_container_width=True)
 
 with col[1]:
     st.markdown('#### Top States')
