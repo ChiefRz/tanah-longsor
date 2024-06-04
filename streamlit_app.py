@@ -106,7 +106,7 @@ with col[0]:
     st.plotly_chart(tren, use_container_width=True)
 
 with col[1]:
-    st.markdown('#### Top States')
+    st.markdown('#### Kecamatan Paling Sering Terjadi Bencana')
 
     st.dataframe(df_selected_year_sorted,
                  column_order=("KECAMATAN", "JUMLAH_KEJADIAN"),
@@ -123,7 +123,8 @@ with col[1]:
                         max_value=max(df_selected_year_sorted.JUMLAH_KEJADIAN),
                      )}
                  )
-
+    
+    st.markdown('#### Proporsi Pelaporan')
     fig = generate_chart(df_rekap_selected_year)
     st.plotly_chart(fig, use_container_width=True)
     
