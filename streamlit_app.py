@@ -90,6 +90,10 @@ def process_data(input):
     # Ubah indeks menjadi kolom biasa dan membuat indeks baru
     jumlah_kejadian = jumlah_kejadian.reset_index()
     jumlah_kejadian = jumlah_kejadian.rename(columns={"index": "Bulan", "NO": "Jumlah Kejadian Bencana"})
+
+    # Tampilkan bulan yang tidak memiliki value 
+    all_bulan = pd.DataFrame(nama_bulan, columns=["Bulan"])
+    jumlah_kejadian = jumlah_kejadian.merge(all_bulan, how="outer").fillna(0)
     
     return jumlah_kejadian
 
