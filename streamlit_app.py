@@ -88,6 +88,7 @@ def process_data(input):
     jumlah_kejadian.index = [nama_bulan[i-1] for i in jumlah_kejadian.index]
     
     # Ubah indeks menjadi kolom biasa dan membuat indeks baru
+    jumlah_kejadian = jumlah_kejadian.reset_index()
     jumlah_kejadian = jumlah_kejadian.rename(columns={"index": "Bulan", "NO": "Jumlah Kejadian Bencana"})
 
     # Tampilkan bulan yang tidak memiliki value 
