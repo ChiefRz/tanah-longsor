@@ -21,6 +21,7 @@ st.set_page_config(
 
 all_rekap = pd.read_csv('all_data/all_rekap.csv')
 all_peta = gpd.read_file('all_data/all_peta.shp')
+all_peta.to_crs(pyproj.CRS.from_epsg(4326), inplace=True)
 
 #######################
 # Sidebar
@@ -37,7 +38,7 @@ with st.sidebar:
     
 ######################
 # Function
-df_peta_selected_year.to_crs(pyproj.CRS.from_epsg(4326), inplace=True)
+
 
 def make_choropleth(input_df, input_columne):
     choropleth = px.choropleth(input_df, geojson=df_peta_selected_year.geometry,
