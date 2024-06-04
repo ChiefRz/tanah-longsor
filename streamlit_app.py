@@ -75,9 +75,9 @@ def tren(input_df):
     ax.tick_params(axis='y', labelsize=10)
     return tren
 
-def process_data(tahun):
+def process_data(input):
     # Kelompokkan data berdasarkan bulan per bulan
-    data_bulan = df_peta_selected_year.groupby(df_peta_selected_year[df_peta_selected_year.TANGGAL_KEJADIAN].dt.month)
+    data_bulan = input.groupby(df_peta_selected_year[df_peta_selected_year.TANGGAL_KEJADIAN].dt.month)
     
     # Hitung jumlah kejadian bencana yang unik pada kolom NO setiap bulan
     jumlah_kejadian = data_bulan["NO"].nunique()
@@ -108,8 +108,7 @@ with col[0]:
     choropleth = make_choropleth(df_peta_selected_year, df_peta_selected_year.geometry, df_peta_selected_year.index, 'KEJADIAN')
     st.plotly_chart(choropleth, use_container_width=True)
     
-    tahun = df_peta_selected_year
-    data_proses = process_data(tahun)
+    data_proses = process_data(df_peta_selected_year)
     st.write(data_proses)
 
 with col[1]:
