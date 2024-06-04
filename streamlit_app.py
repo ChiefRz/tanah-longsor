@@ -55,7 +55,7 @@ with col[0]:
                                   color_continuous_scale='Reds',
                                   range_color=(0, max(df_peta_selected_year.KEJADIAN)),
                                   labels={'KEJADIAN':'KEJADIAN'}
-                                 )
+                                 ))
     fig.update_layout(
         plot_bgcolor='rgba(0, 0, 0, 0)',
         paper_bgcolor='rgba(0, 0, 0, 0)',
