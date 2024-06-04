@@ -90,6 +90,8 @@ with col[0]:
     
     choropleth = make_choropleth(df_peta_selected_year, df_peta_selected_year.geometry, df_peta_selected_year.index, 'KEJADIAN')
     st.plotly_chart(choropleth, use_container_width=True)
+
+    st.markdown(f' #### Jumlah Kejadian Tanah Longsor Kab. Semarang Tahun {selected_year}')
     
     tren = tren(df_rekap_selected_year)
     st.plotly_chart(tren, use_container_width=True)
