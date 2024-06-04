@@ -71,12 +71,11 @@ def tren(input):
     jumlah_kejadian = jumlah_kejadian.reset_index()
     jumlah_kejadian = jumlah_kejadian.rename(columns={"index": "Bulan", "NO": "Jumlah Kejadian Bencana"})
 
-    plt.figure(figsize=(12, 6))
     plt.plot(jumlah_kejadian["Bulan"], jumlah_kejadian["Jumlah Kejadian Bencana"])
-    plt.title(f'Jumlah Kejadian Tanah Longsor Kab. Semarang Tahun {selected_year}', loc="center", fontsize=20)
-    plt.show()
-
-    return plt
+    plt.xlabel("Bulan")
+    plt.ylabel("Jumlah Kejadian Bencana")
+    plt.title("Trend Kejadian Bencana")
+    
 
 def create_sum_order_items_df(df):
     sum_order_items_df = df.groupby('KECAMATAN')['NO'].count().reset_index(name='JUMLAH_KEJADIAN')
@@ -95,7 +94,7 @@ with col[0]:
     st.plotly_chart(choropleth, use_container_width=True)
     
     data_proses = tren(df_rekap_selected_year)
-    st.write(data_proses)
+    st.pyplot(data_proses)
 
 with col[1]:
     st.markdown('#### Top States')
