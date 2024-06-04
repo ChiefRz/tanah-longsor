@@ -86,6 +86,7 @@ def generate_chart(input):
     }, inplace=True)
     
     fig = px.pie(rekap_lapor, values='Jumlah Kejadian Bencana', names='PELAPOR', hole=.3)
+    fig.update_layout(legend=dict(orientation="h", y=1.1, x=0.5))
     return fig
 
 sum_order_items_df = create_sum_order_items_df(df_rekap_selected_year)
