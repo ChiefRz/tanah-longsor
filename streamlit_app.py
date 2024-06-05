@@ -48,11 +48,21 @@ def make_choropleth(input_df, input_js, input_id, input_columne):
                                       hover_name='KECAMATAN',
                                       text='KECAMATAN'
                                )
+    annotations = []
+    for i, row in input_df.iterrows():
+        annotations.append(dict(
+            x=row['coords'][0],
+            y=row['coords'][1],
+            text=row['KECAMATAN'],
+            font=dict(size=10),
+            showarrow=False
+        ))
     choropleth.update_layout(
         plot_bgcolor='rgba(0, 0, 0, 0)',
         paper_bgcolor='rgba(0, 0, 0, 0)',
         margin=dict(l=0, r=0, t=0, b=0),
-        height=350,  # Add annotations to the layout
+        height=350,
+        annotations=annotations  # Add annotations to the layout
     )
     choropleth.update_geos(fitbounds="locations", visible=True)
     return choropleth
