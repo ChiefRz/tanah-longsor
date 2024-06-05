@@ -35,20 +35,21 @@ with st.sidebar:
     
 ######################
 # Function
-def make_choropleth(input_df, input_js, input_id, input_column):
+# Choropleth map
+def make_choropleth(input_df, input_js, input_id, input_columne):
     choropleth = px.choropleth(input_df, geojson=input_js,
-                               locations=input_id,
-                               color=input_column,
-                               color_continuous_scale='Reds',
-                               range_color=(0, input_df[input_column].max()),
-                               labels={input_column:input_column},
-                               hover_name='KECAMATAN'
+                                      locations=input_id,
+                                      color=input_columne,
+                                      color_continuous_scale='Reds',
+                                      range_color=(0, max(df_peta_selected_year.KEJADIAN)),
+                                      labels={'KEJADIAN':'KEJADIAN'},
+                                      hover_name='KECAMATAN',
                                )
     choropleth.update_layout(
         plot_bgcolor='rgba(0, 0, 0, 0)',
         paper_bgcolor='rgba(0, 0, 0, 0)',
         margin=dict(l=0, r=0, t=0, b=0),
-        height=350,
+        height=350
     )
     choropleth.update_geos(fitbounds="locations", visible=True)
     return choropleth
