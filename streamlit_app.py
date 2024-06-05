@@ -55,7 +55,7 @@ def make_choropleth(input_df, input_js, input_id, input_columne):
     choropleth.add_scattergeo(
         geojson=input_js,
         locations = input_id,
-        text = df_peta_selected_year['KECAMATAN'],
+        text = input_df['KECAMATAN'],
         mode = 'text') 
     choropleth.update_geos(fitbounds="locations", visible=True)
     return choropleth
