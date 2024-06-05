@@ -37,14 +37,14 @@ with st.sidebar:
 # Function
 
 def make_choropleth(input_df, input_js, input_id, input_columne):
-    choropleth = px.choropleth(input_df, geojson=input_js,
-                               locations=input_id,
-                               color=input_columne,
-                               color_continuous_scale='Reds',
-                               range_color=(0, max(df_peta_selected_year.KEJADIAN)),
-                               labels={'KEJADIAN':'KEJADIAN'},
-                               hover_name='KECAMATAN',
-                               mapbox_style='carto-positron',
+    choropleth = px.choropleth_mapbox(input_df, geojson=input_js,
+                                      locations=input_id,
+                                      color=input_columne,
+                                      color_continuous_scale='Reds',
+                                      range_color=(0, max(df_peta_selected_year.KEJADIAN)),
+                                      labels={'KEJADIAN':'KEJADIAN'},
+                                      hover_name='KECAMATAN',
+                                      mapbox_style='carto-positron',
                                       zoom=5,
                                       center={'lat': -2.5489, 'lon': 118.0149},
                                       opacity=0.5
