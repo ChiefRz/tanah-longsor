@@ -35,16 +35,16 @@ with st.sidebar:
     
 ######################
 # Function
-def make_choropleth(input_df, input_js, input_id, input_columne):
+def make_choropleth(input_df, input_js, input_id, input_column):
     choropleth = px.choropleth(input_df, geojson=input_js,
                                locations=input_id,
-                               color=input_columne,
+                               color=input_column,
                                color_continuous_scale='Reds',
-                               range_color=(0, max(df_peta_selected_year.KEJADIAN)),
-                               labels={'KEJADIAN':'KEJADIAN'},
+                               range_color=(0, input_df[input_column].max()),
+                               labels={input_column:input_column},
                                hover_name='KECAMATAN'
                                )
-        annotations = []
+    annotations = []
     for i, row in input_df.iterrows():
         annotations.append(dict(
             x=row[input_id],
@@ -58,11 +58,12 @@ def make_choropleth(input_df, input_js, input_id, input_columne):
         plot_bgcolor='rgba(0, 0, 0, 0)',
         paper_bgcolor='rgba(0, 0, 0, 0)',
         margin=dict(l=0, r=0, t=0, b=0),
-        height=350
+        height=350,
+        annotations=annotations
     )
     choropleth.update_geos(fitbounds="locations", visible=True)
     return choropleth
-
+    
 def tren(input):
     # Kelompokkan data berdasarkan bulan per bulan
     input["TANGGAL_KEJADIAN"] = pd.to_datetime(input["TANGGAL_KEJADIAN"])
