@@ -51,6 +51,11 @@ def make_choropleth(input_df, input_js, input_id, input_columne):
         margin=dict(l=0, r=0, t=0, b=0),
         height=350
     )
+    for i, row in input_df.iterrows():
+        choropleth.add_annotation(text=row['KECAMATAN'],
+                                   x=row[input_id],
+                                   showarrow=False,
+                                   font=dict(size=10, color='black'))
     choropleth.update_geos(fitbounds="locations", visible=True)
     return choropleth
 
