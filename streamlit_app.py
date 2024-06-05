@@ -96,7 +96,7 @@ def musim(input_df):
     
     fig = px.bar(rekap_musim, y='Jumlah Kejadian Bencana', x='MUSIM', text_auto='.2s',
             title="Controlled text sizes, positions and angles")
-    rekap_musim.update_traces(textfont_size=12, textangle=0, textposition="outside", cliponaxis=False)
+    fig.update_traces(textfont_size=12, textangle=0, textposition="outside", cliponaxis=False)
     return fig
 
 
