@@ -38,9 +38,6 @@ with st.sidebar:
 # Function
 # Choropleth map
 def make_choropleth(input_df, input_js, input_id, input_columne):
-    input_df['coords'] = input_df['geometry'].apply(lambda x: x.representative_point().coords[:])
-    input_df['coords'] = [coords[0] for coords in input_df['coords']]
-    input_df['coords'] = gpd.GeoSeries(input_df['coords'].apply(lambda x: Point(x)))
     choropleth = px.choropleth(input_df, geojson=input_js,
                                       locations=input_id,
                                       color=input_columne,
@@ -49,21 +46,11 @@ def make_choropleth(input_df, input_js, input_id, input_columne):
                                       labels={'KEJADIAN':'KEJADIAN'},
                                       hover_name='KECAMATAN',
                                )
-    annotations = []
-    for i, row in input_df.iterrows():
-        annotations.append(dict(
-            x=row['coords'].x,
-            y=row['coords'].y,
-            text=row['KECAMATAN'],
-            font=dict(size=10),
-            showarrow=False
-        ))
     choropleth.update_layout(
         plot_bgcolor='rgba(0, 0, 0, 0)',
         paper_bgcolor='rgba(0, 0, 0, 0)',
         margin=dict(l=0, r=0, t=0, b=0),
-        height=350,
-        annotations=annotations  # Add annotations to the layout
+        height=350,  # Add annotations to the layout
     )
     choropleth.add_scattergeo(
         geojson=input_js,
