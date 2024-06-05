@@ -69,8 +69,9 @@ def buat_tren(input_df):
 
 def buat_jumlah_kejadian():
     sum_order_items_df = df_rekap_selected_year.groupby('KECAMATAN')['NO'].count().reset_index(name='JUMLAH_KEJADIAN')
-    df_selected_year_sorted = sum_order_items_df.sort_values(by="JUMLAH_KEJADIAN", ascending=False)
-    return df_selected_year_sorted
+    return sum_order_items_df
+    
+df_selected_year_sorted = sum_order_items_df.sort_values(by="JUMLAH_KEJADIAN", ascending=False)
 
 def buat_pelapor(input_df):
     rekap_lapor = input_df.groupby(by="PELAPOR").NO.nunique().reset_index()
@@ -112,7 +113,7 @@ with col[0]:
 with col[1]:
     st.markdown('#### Kecamatan Paling Sering Terjadi Bencana')
 
-    st.dataframe(buat_jumlah_kejadian,
+    st.dataframe(df_selected_year_sorted,
                  column_order=("KECAMATAN", "JUMLAH_KEJADIAN"),
                  hide_index=True,
                  width=None,
@@ -124,7 +125,7 @@ with col[1]:
                         "JUMLAH_KEJADIAN",
                         format="%f",
                         min_value=0,
-                        max_value=max(buat_jumlah_kejadian.JUMLAH_KEJADIAN),
+                        max_value=max(df_selected_year_sorted.JUMLAH_KEJADIAN),
                      )}
                  )
     
