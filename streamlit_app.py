@@ -62,7 +62,7 @@ def make_choropleth(input_df, input_js, input_id, input_columne):
                                font=dict(size=10, color='black'))
             
      choropleth.update_geos(fitbounds="locations", visible=True)
-    return choropleth
+return choropleth
 
 def tren(input):
     # Kelompokkan data berdasarkan bulan per bulan
