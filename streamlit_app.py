@@ -6,6 +6,7 @@ import geopandas as gpd
 import matplotlib.pyplot as plt
 import plotly.express as px
 import plotly.graph_objects as go
+from shapely.geometry import Point
 
 #######################
 # Page configuration
