@@ -44,24 +44,11 @@ def make_choropleth(input_df, input_js, input_id, input_column):
                                labels={input_column:input_column},
                                hover_name='KECAMATAN'
                                )
-    annotations = []
-    if input_id in input_df.columns:
-        for i, row in input_df.iterrows():
-            if row[input_id] is not None and not pd.isnull(row[input_id]):
-                annotations.append(dict(
-                    x=row[input_id],
-                    y=0,
-                    text=row['KECAMATAN'],
-                    font=dict(size=10),
-                    showarrow=False
-                ))
-
     choropleth.update_layout(
         plot_bgcolor='rgba(0, 0, 0, 0)',
         paper_bgcolor='rgba(0, 0, 0, 0)',
         margin=dict(l=0, r=0, t=0, b=0),
         height=350,
-        annotations=annotations
     )
     choropleth.update_geos(fitbounds="locations", visible=True)
     return choropleth
