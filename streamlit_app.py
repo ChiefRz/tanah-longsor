@@ -42,9 +42,16 @@ def make_choropleth(input_df, input_js, input_id, input_columne):
                                color_continuous_scale='Reds',
                                range_color=(0, max(df_peta_selected_year.KEJADIAN)),
                                labels={'KEJADIAN':'KEJADIAN'},
-                               hover_name='KECAMATAN',
-                               featureidkey='KECAMATAN'
+                               hover_name='KECAMATAN'
                                )
+    for i, row in input_df.iterrows():
+        annotations.append(dict(
+            x=row[input_id],
+            y=0,
+            text=row['KECAMATAN'],
+            font=dict(size=10),
+            showarrow=False
+        ))
     choropleth.update_layout(
         plot_bgcolor='rgba(0, 0, 0, 0)',
         paper_bgcolor='rgba(0, 0, 0, 0)',
