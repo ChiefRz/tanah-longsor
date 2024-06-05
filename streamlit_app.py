@@ -67,11 +67,11 @@ def buat_tren(input_df):
     fig = px.line(jumlah_kejadian, x='Bulan', y='Jumlah Kejadian Bencana', markers=True)
     return fig
 
-def buat_jumlah_kejadian():
-    sum_order_items_df = df_rekap_selected_year.groupby('KECAMATAN')['NO'].count().reset_index(name='JUMLAH_KEJADIAN')
+def buat_jumlah_kejadian(input_df):
+    sum_order_items_df = input_df.groupby('KECAMATAN')['NO'].count().reset_index(name='JUMLAH_KEJADIAN')
     return sum_order_items_df
     
-sum_order_items_df = buat_jumlah_kejadian    
+sum_order_items_df = buat_jumlah_kejadian(df_rekap_selected_year)    
 df_selected_year_sorted = sum_order_items_df.sort_values(by="JUMLAH_KEJADIAN", ascending=False)
 
 def buat_pelapor(input_df):
