@@ -44,7 +44,7 @@ def make_choropleth(input_df, input_js, input_id, input_columne):
                                labels={'KEJADIAN':'KEJADIAN'},
                                hover_name='KECAMATAN'
                                )
-    annotations = []
+        annotations = []
     for i, row in input_df.iterrows():
         annotations.append(dict(
             x=row[input_id],
@@ -53,6 +53,7 @@ def make_choropleth(input_df, input_js, input_id, input_columne):
             font=dict(size=10),
             showarrow=False
         ))
+
     choropleth.update_layout(
         plot_bgcolor='rgba(0, 0, 0, 0)',
         paper_bgcolor='rgba(0, 0, 0, 0)',
