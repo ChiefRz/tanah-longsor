@@ -39,6 +39,7 @@ with st.sidebar:
 def make_choropleth(input_df, input_js, input_id, input_columne):
     input_df['coords'] = input_df['geometry'].apply(lambda x: x.representative_point().coords[:])
     input_df['coords'] = [coords[0] for coords in input_df['coords']]
+    input_df['coords'] = gpd.GeoSeries(input_df['coords'].apply(lambda x: Point(x)))
     choropleth = px.choropleth(input_df, geojson=input_js,
                                       locations=input_id,
                                       color=input_columne,
