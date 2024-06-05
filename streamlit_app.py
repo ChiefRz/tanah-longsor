@@ -5,8 +5,6 @@ import pandas as pd
 import geopandas as gpd
 import matplotlib.pyplot as plt
 import plotly.express as px
-import plotly.graph_objects as go
-from shapely.geometry import Point
 
 #######################
 # Page configuration
@@ -36,7 +34,7 @@ with st.sidebar:
     
 ######################
 # Function
-# Choropleth map
+
 def make_choropleth(input_df, input_js, input_id, input_columne):
     choropleth = px.choropleth(input_df, geojson=input_js,
                                       locations=input_id,
@@ -52,11 +50,6 @@ def make_choropleth(input_df, input_js, input_id, input_columne):
         margin=dict(l=0, r=0, t=0, b=0),
         height=350,  # Add annotations to the layout
     )
-    choropleth.add_scattergeo(
-        geojson=input_js,
-        locations = input_id,
-        text = input_df['KECAMATAN'],
-        mode = 'text') 
     choropleth.update_geos(fitbounds="locations", visible=True)
     return choropleth
     
