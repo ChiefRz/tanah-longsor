@@ -15,7 +15,6 @@ st.set_page_config(
 
 #######################
 # Load data
-
 all_rekap = pd.read_csv('all_data/all_rekap.csv')
 all_peta = gpd.read_file('all_data/all_peta.geojson')
 
@@ -23,7 +22,7 @@ all_peta = gpd.read_file('all_data/all_peta.geojson')
 # Sidebar
 with st.sidebar:
     st.image('asset/bpbd_kab_semarang.png')
-    st.title('Tanah Longsor Dashboard')
+    st.title('Dashboard Tanah Longsor')
     
     year_list = list(all_rekap.TAHUN.unique())[::-1]
     
@@ -34,7 +33,6 @@ with st.sidebar:
     
 ######################
 # Function
-
 def make_choropleth(input_df, input_js, input_id, input_columne):
     choropleth = px.choropleth(input_df, geojson=input_js,
                                       locations=input_id,
@@ -94,8 +92,7 @@ def musim(input_df):
          "NO": "Jumlah Kejadian Bencana"
          }, inplace=True)
     
-    fig = px.bar(rekap_musim, y='Jumlah Kejadian Bencana', x='MUSIM', text_auto='.2s',
-            title="Controlled text sizes, positions and angles")
+    fig = px.bar(rekap_musim, y='Jumlah Kejadian Bencana', x='MUSIM', text_auto='.2s')
     fig.update_traces(textfont_size=12, textangle=0, textposition="outside", cliponaxis=False)
     return fig
 
@@ -133,6 +130,10 @@ with col[1]:
                         format="%f",
                         min_value=0,
                         max_value=max(df_selected_year_sorted.JUMLAH_KEJADIAN),
+                        color={
+                        "bar_color": "#33cc33",  # green
+                        "bar_inactive_color": "#cccccc",  # gray
+                        "bar_inactive_fill_color": "#ffffff"}  # white
                      )}
                  )
     
