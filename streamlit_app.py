@@ -42,6 +42,9 @@ def make_choropleth(input_df, input_js, input_id, input_columne):
     for feature in input_js.features:
         geojson_features.append(geojson.Feature(geometry=feature.geometry, properties={}))
     geojson_collection = geojson.FeatureCollection(geojson_features)
+
+    geojson_obj = input_js.to_crs(epsg=4326).to_json()
+    
     choropleth = px.choropleth(input_df, geojson=input_js,
                                       locations=input_id,
                                       color=input_columne,
