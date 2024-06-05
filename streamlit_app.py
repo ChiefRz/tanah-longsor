@@ -35,34 +35,33 @@ with st.sidebar:
     
 ######################
 # Function
-
 def make_choropleth(input_df, input_js, input_id, input_columne):
-    choropleth = px.choropleth_mapbox(input_df, geojson=input_js,
-                                      locations=input_id,
-                                      color=input_columne,
-                                      color_continuous_scale='Reds',
-                                      range_color=(0, max(df_peta_selected_year.KEJADIAN)),
-                                      labels={'KEJADIAN':'KEJADIAN'},
-                                      hover_name='KECAMATAN',
-                                      mapbox_style='carto-positron',
-                                      zoom=5,
-                                      center={'lat': -2.5489, 'lon': 118.0149},
-                                      opacity=0.5
-                               )
+    choropleth = go.Figure(go.Choroplethmapbox(
+        geojson=input_js,
+        locations=input_df[input_id],
+        z=input_df[input_columne],
+        colorscale='Reds',
+        colorbar_title='KEJADIAN',
+        marker_opacity=0.5,
+        marker_line_width=0
+    ))
+    
     choropleth.update_layout(
-        plot_bgcolor='rgba(0, 0, 0, 0)',
-        paper_bgcolor='rgba(0, 0, 0, 0)',
-        margin=dict(l=0, r=0, t=0, b=0),
-        height=350
+        mapbox_style='carto-positron',
+        mapbox_zoom=5,
+        mapbox_center={'lat': -2.5489, 'lon': 118.0149},
+        height=350,
+        margin=dict(l=0, r=0, t=0, b=0)
     )
     for i, row in input_df.iterrows():
-        choropleth.add_annotation(text=row['KECAMATAN'],
-                                   x=row[input_id],
-                                   y=row['lat'],  # Assuming you have a 'lat' column
-                                   showarrow=False,
-                                   font=dict(size=10, color='black'))
-        
-    choropleth.update_geos(fitbounds="locations", visible=True)
+        if not pd.isna(row[input_id]) and not pd.isna(row['lat']):
+            fig.add_annotation(text=row['KECAMATAN'],
+                               x=row[input_id],
+                               y=row['lat'],
+                               showarrow=False,
+                               font=dict(size=10, color='black'))
+            
+     choropleth.update_geos(fitbounds="locations", visible=True)
     return choropleth
 
 def tren(input):
