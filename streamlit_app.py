@@ -52,8 +52,8 @@ def make_choropleth(input_df, input_js, input_id, input_columne):
     annotations = []
     for i, row in input_df.iterrows():
         annotations.append(dict(
-            x=row['coords'][0],
-            y=row['coords'][1],
+            x=row['coords'].x,
+            y=row['coords'].y,
             text=row['KECAMATAN'],
             font=dict(size=10),
             showarrow=False
