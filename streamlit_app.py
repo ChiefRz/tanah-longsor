@@ -71,6 +71,7 @@ def buat_jumlah_kejadian():
     sum_order_items_df = df_rekap_selected_year.groupby('KECAMATAN')['NO'].count().reset_index(name='JUMLAH_KEJADIAN')
     return sum_order_items_df
     
+sum_order_items_df = sum_order_items_df    
 df_selected_year_sorted = sum_order_items_df.sort_values(by="JUMLAH_KEJADIAN", ascending=False)
 
 def buat_pelapor(input_df):
