@@ -88,6 +88,18 @@ def generate_chart(input):
     fig.update_layout(legend=dict(orientation="h"))
     return fig
 
+def musim(input_df):
+    rekap_musim = input_df.groupby(by="MUSIM").NO.nunique().reset_index()
+    rekap_musim.rename(columns={
+         "NO": "Jumlah Kejadian Bencana"
+         }, inplace=True)
+    
+    fig = px.bar(rekap_musim, y='Jumlah Kejadian Bencana', x='MUSIM', text_auto='.2s',
+            title="Controlled text sizes, positions and angles")
+    rekap_musim.update_traces(textfont_size=12, textangle=0, textposition="outside", cliponaxis=False)
+    return fig
+
+
 sum_order_items_df = create_sum_order_items_df(df_rekap_selected_year)
 df_selected_year_sorted = sum_order_items_df.sort_values(by="JUMLAH_KEJADIAN", ascending=False)
 #######################
@@ -128,4 +140,6 @@ with col[1]:
     fig = generate_chart(df_rekap_selected_year)
     st.plotly_chart(fig, use_container_width=True)
     
-    st.write(df_peta_selected_year.head())
+    st.markdown('##### Rekap Bencana Berdasarkan Musim')
+    fig = musim(df_rekap_selected_year)
+    st.plotly_chart(fig, use_container_width=True)
