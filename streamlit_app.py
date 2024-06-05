@@ -130,10 +130,7 @@ with col[1]:
                         format="%f",
                         min_value=0,
                         max_value=max(df_selected_year_sorted.JUMLAH_KEJADIAN),
-                        color={
-                        "bar_color": "#33cc33",  # green
-                        "bar_inactive_color": "#cccccc",  # gray
-                        "bar_inactive_fill_color": "#ffffff"}  # white
+                        theme="danger"
                      )}
                  )
     
