@@ -43,7 +43,11 @@ def make_choropleth(input_df, input_js, input_id, input_columne):
                                color_continuous_scale='Reds',
                                range_color=(0, max(df_peta_selected_year.KEJADIAN)),
                                labels={'KEJADIAN':'KEJADIAN'},
-                               hover_name='KECAMATAN'
+                               hover_name='KECAMATAN',
+                               mapbox_style='carto-positron',
+                                      zoom=5,
+                                      center={'lat': -2.5489, 'lon': 118.0149},
+                                      opacity=0.5
                                )
     choropleth.update_layout(
         plot_bgcolor='rgba(0, 0, 0, 0)',
@@ -53,8 +57,11 @@ def make_choropleth(input_df, input_js, input_id, input_columne):
     )
     for i, row in input_df.iterrows():
         choropleth.add_annotation(text=row['KECAMATAN'],
+                                   x=row[input_id],
+                                   y=row['lat'],  # Assuming you have a 'lat' column
                                    showarrow=False,
                                    font=dict(size=10, color='black'))
+        
     choropleth.update_geos(fitbounds="locations", visible=True)
     return choropleth
 
