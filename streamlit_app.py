@@ -138,6 +138,6 @@ with col[1]:
     pelapor = buat_pelapor(df_rekap_selected_year)
     st.plotly_chart(pelapor, use_container_width=True)
     
-    st.markdown('##### Rekap Kejadian Tanah Longsor Berdasarkan Musim')
+    st.markdown('##### Jumlah Kejadian Tanah Longsor Berdasarkan Musim')
     musim = buat_musim(df_rekap_selected_year)
     st.plotly_chart(musim, use_container_width=True)
