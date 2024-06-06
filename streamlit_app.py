@@ -25,11 +25,16 @@ with st.sidebar:
     st.title('Dashboard Tanah Longsor')
     
     year_list = list(all_rekap.TAHUN.unique())[::-1]
+    year_list.insert(0, "All Years")  # Add "All Years" option
     
     selected_year = st.selectbox('Select a year', year_list)
-    df_rekap_selected_year = all_rekap[all_rekap.TAHUN == selected_year]
-    df_peta_selected_year = all_peta[all_peta.TAHUN == selected_year]
     
+    if selected_year == "All Years":
+        df_rekap_selected_year = all_rekap
+        df_peta_selected_year = all_peta
+    else:
+        df_rekap_selected_year = all_rekap[all_rekap.TAHUN == selected_year]
+        df_peta_selected_year = all_peta[all_peta.TAHUN == selected_year]
     
 ######################
 # Function
