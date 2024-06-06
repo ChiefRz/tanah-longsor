@@ -110,7 +110,7 @@ with col[0]:
     choropleth = buat_choropleth(df_peta_selected_year, df_peta_selected_year.geometry, df_peta_selected_year.index, 'KEJADIAN')
     st.plotly_chart(choropleth, use_container_width=True)
 
-    st.markdown(f' #### Jumlah Kejadian Tanah Longsor Kab. Semarang Tahun {selected_year}')
+    st.markdown(f' #### Tren Kejadian Tanah Longsor Kab. Semarang Tahun {selected_year}')
     
     tren = buat_tren(df_rekap_selected_year)
     st.plotly_chart(tren, use_container_width=True)
@@ -134,10 +134,10 @@ with col[1]:
                      )}
                  )
     
-    st.markdown('##### Proporsi Pelaporan')
+    st.markdown('##### Proporsi Pelaporan Kejadian Tanah Longsor')
     pelapor = buat_pelapor(df_rekap_selected_year)
     st.plotly_chart(pelapor, use_container_width=True)
     
-    st.markdown('##### Rekap Bencana Berdasarkan Musim')
+    st.markdown('##### Rekap Kejadian Tanah Longsor Berdasarkan Musim')
     musim = buat_musim(df_rekap_selected_year)
     st.plotly_chart(musim, use_container_width=True)
