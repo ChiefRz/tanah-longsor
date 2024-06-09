@@ -78,16 +78,6 @@ def buat_jumlah_kejadian(input_df):
 sum_order_items_df = buat_jumlah_kejadian(df_rekap_selected_year)    
 df_selected_year_sorted = sum_order_items_df.sort_values(by="JUMLAH_KEJADIAN", ascending=False)
 
-def buat_pelapor(input_df):
-    rekap_lapor = input_df.groupby(by="PELAPOR").NO.nunique().reset_index()
-    rekap_lapor.rename(columns={
-        "NO": "Jumlah Kejadian Bencana"
-    }, inplace=True)
-    
-    fig = px.pie(rekap_lapor, values='Jumlah Kejadian Bencana', names='PELAPOR', hole=.3)
-    fig.update_layout(legend=dict(orientation="h"))
-    return fig
-
 def buat_musim(input_df):
     rekap_musim = input_df.groupby(by="MUSIM").NO.nunique().reset_index()
     rekap_musim.rename(columns={
@@ -96,6 +86,16 @@ def buat_musim(input_df):
     
     fig = px.bar(rekap_musim, y='Jumlah Kejadian Bencana', x='MUSIM', text_auto='.2s')
     fig.update_traces(textfont_size=12, textangle=0, textposition="outside", cliponaxis=False)
+    return fig
+    
+def buat_pelapor(input_df):
+    rekap_lapor = input_df.groupby(by="PELAPOR").NO.nunique().reset_index()
+    rekap_lapor.rename(columns={
+        "NO": "Jumlah Kejadian Bencana"
+    }, inplace=True)
+    
+    fig = px.pie(rekap_lapor, values='Jumlah Kejadian Bencana', names='PELAPOR', hole=.3)
+    fig.update_layout(legend=dict(orientation="h"))
     return fig
 
 
