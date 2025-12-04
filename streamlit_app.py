@@ -126,11 +126,11 @@ with col[1]:
                     "KECAMATAN": st.column_config.TextColumn(
                         "KECAMATAN",
                     ),
-                    "JUMLAH_KEJADIAN": st.column_config.BarChartColumn(
+                    "JUMLAH_KEJADIAN": st.column_config.ProgressColumn(
                         "JUMLAH_KEJADIAN",
-                        y_min=0,
-                        y_max=max(df_selected_year_sorted.JUMLAH_KEJADIAN),
-                        color="#ff4b4b"
+                        format="%d",
+                        min_value=0,
+                        max_value=max_val,
                      )}
                  )
     
@@ -142,6 +142,7 @@ with col[1]:
     pelapor = buat_pelapor(df_rekap_selected_year)
     st.plotly_chart(pelapor, use_container_width=True)
     
+
 
 
 
