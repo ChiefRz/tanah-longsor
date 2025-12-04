@@ -130,7 +130,6 @@ with col[1]:
                         "JUMLAH_KEJADIAN",
                         format="%d",
                         min_value=0,
-                        max_value=max_val,
                      )}
                  )
     
@@ -142,6 +141,7 @@ with col[1]:
     pelapor = buat_pelapor(df_rekap_selected_year)
     st.plotly_chart(pelapor, use_container_width=True)
     
+
 
 
 
