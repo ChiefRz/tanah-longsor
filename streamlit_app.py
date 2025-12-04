@@ -129,6 +129,7 @@ with col[1]:
                     "JUMLAH_KEJADIAN": st.column_config.ProgressColumn(
                         "JUMLAH_KEJADIAN",
                         format="%d",
+                        color="auto",
                         min_value=0,
                      )}
                  )
@@ -141,6 +142,7 @@ with col[1]:
     pelapor = buat_pelapor(df_rekap_selected_year)
     st.plotly_chart(pelapor, use_container_width=True)
     
+
 
 
 
