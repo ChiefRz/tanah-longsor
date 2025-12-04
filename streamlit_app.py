@@ -121,7 +121,7 @@ with col[1]:
     st.dataframe(df_selected_year_sorted,
                  column_order=("KECAMATAN", "JUMLAH_KEJADIAN"),
                  hide_index=True,
-                 width=None,
+                 use_container_width=True,
                  column_config={
                     "KECAMATAN": st.column_config.TextColumn(
                         "KECAMATAN",
@@ -142,4 +142,5 @@ with col[1]:
     pelapor = buat_pelapor(df_rekap_selected_year)
     st.plotly_chart(pelapor, use_container_width=True)
     
+
 
